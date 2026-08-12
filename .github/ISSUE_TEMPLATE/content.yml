@@ -1,0 +1,29 @@
+name: Question or result suggestion
+description: Suggest a clearer scenario, translation, weight, or result description.
+title: "[Content]: "
+labels: [content]
+body:
+  - type: textarea
+    attributes:
+      label: Current content or affected type
+      description: Include the question ID, dimension, or five-letter result code.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Suggested change
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Why it is better
+      description: Explain clarity, cultural fit, fairness, or scoring impact.
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: Originality
+      options:
+        - label: I confirm this contribution is original or appropriately licensed.
+          required: true
+

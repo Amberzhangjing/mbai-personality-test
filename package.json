@@ -1,0 +1,11 @@
+{
+  "name": "mbai-personality-test",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Open bilingual AI-era personality test with five dimensions and 32 result variants.",
+  "scripts": {
+    "test": "node validation/validate.mjs"
+  },
+  "license": "MIT"
+}
+

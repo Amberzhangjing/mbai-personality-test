@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0c10">
+  <meta name="description" content="MBAI — 开源中英双语 AI 时代人格测试。30 道场景题，5 个维度，32 种结果。">
+  <meta property="og:title" content="MBAI — AI 时代人格测试">
+  <meta property="og:description" content="AI 时代，你是哪种人？">
+  <meta property="og:type" content="website">
+  <title>MBAI — AI 时代人格测试</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-a" aria-hidden="true"></div>
+  <div class="ambient ambient-b" aria-hidden="true"></div>
+  <main class="app-shell">
+    <header class="site-header">
+      <button class="brand" id="brandButton" type="button" aria-label="MBAI home">
+        <span>MB</span><span class="brand-ai">AI</span>
+      </button>
+      <div class="header-meta">
+        <span class="open-badge" data-i18n="openSource">OPEN SOURCE</span>
+        <button class="language-quick" id="quickLanguage" type="button" aria-label="Switch language">EN</button>
+      </div>
+    </header>
+
+    <section class="screen active intro-screen" id="introScreen" aria-labelledby="heroTitle">
+      <div class="hero-orbit" aria-hidden="true">
+        <span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span>
+        <span class="orbit-core">5D</span>
+      </div>
+      <p class="eyebrow" data-i18n="eyebrow">AI ERA PERSONALITY</p>
+      <h1 id="heroTitle"><span data-i18n="heroLine1">AI 时代，</span><br><span class="gradient-text" data-i18n="heroLine2">你是哪种人？</span></h1>
+      <p class="hero-copy" data-i18n="heroCopy">当 AI 成为日常搭档，你会指挥它、共创它、质疑它、守住它，还是替它消除那股 AI 味？</p>
+      <div class="stat-grid" aria-label="Test overview">
+        <div><strong>30</strong><span data-i18n="scenarios">场景题</span></div>
+        <div><strong>5</strong><span data-i18n="dimensions">核心维度</span></div>
+        <div><strong>32</strong><span data-i18n="archetypes">人格结果</span></div>
+      </div>
+      <button class="button button-primary button-wide" id="openSetup" type="button"><span data-i18n="start">开始测试</span><span aria-hidden="true">→</span></button>
+      <p class="fine-print" data-i18n="introNote">约 5 分钟 · 没有标准答案 · 答案仅在本地处理</p>
+    </section>
+
+    <section class="screen setup-screen" id="setupScreen" aria-labelledby="setupTitle">
+      <button class="text-back" id="setupBack" type="button"><span aria-hidden="true">←</span> <span data-i18n="back">返回</span></button>
+      <p class="eyebrow" data-i18n="beforeStart">BEFORE WE START</p>
+      <h2 id="setupTitle" data-i18n="setupTitle">先给这份报告一个名字</h2>
+      <p class="section-copy" data-i18n="setupCopy">可以使用真名、昵称或任何你想在结果卡上看到的名字。</p>
+      <label class="field-label" for="reportName" data-i18n="nameLabel">报告名称</label>
+      <input class="name-input" id="reportName" name="reportName" maxlength="20" autocomplete="nickname" data-i18n-placeholder="namePlaceholder" placeholder="例如：Amber">
+      <p class="field-hint" id="nameHint" data-i18n="nameHint">最多 20 个字符，不会上传。</p>
+
+      <fieldset class="language-fieldset">
+        <legend class="field-label" data-i18n="languageLabel">测试与报告语言</legend>
+        <div class="segmented" role="group" aria-label="Language">
+          <button class="segment active" type="button" data-language="zh">中文</button>
+          <button class="segment" type="button" data-language="en">English</button>
+        </div>
+      </fieldset>
+
+      <div class="privacy-note">
+        <span aria-hidden="true">◎</span>
+        <p data-i18n="privacy">MBAI 没有后端、账号或统计追踪。姓名与答案只存在于当前页面。</p>
+      </div>
+      <button class="button button-primary button-wide" id="beginQuiz" type="button" disabled><span data-i18n="begin">进入第 1 题</span><span aria-hidden="true">→</span></button>
+    </section>
+
+    <section class="screen quiz-screen" id="quizScreen" aria-labelledby="questionTitle">
+      <div class="progress-head">
+        <div class="progress-track" aria-label="Progress"><span id="progressBar"></span></div>
+        <span class="progress-count" id="progressCount">1 / 30</span>
+      </div>
+      <p class="question-kicker" id="questionKicker">SCENARIO 01</p>
+      <h2 id="questionTitle" class="question-title"></h2>
+      <div class="answer-list" id="answerList" role="group" aria-label="Answers"></div>
+      <div class="quiz-nav">
+        <button class="button button-secondary" id="previousQuestion" type="button"><span aria-hidden="true">←</span><span data-i18n="previous">上一题</span></button>
+        <button class="button button-primary" id="nextQuestion" type="button" disabled><span data-i18n="next">下一题</span><span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section class="screen result-screen" id="resultScreen" aria-labelledby="resultName">
+      <div class="result-hero">
+        <p class="eyebrow" id="reportOwner"></p>
+        <div class="result-code" id="resultCode"></div>
+        <div class="camp-badge" id="campBadge"></div>
+        <h2 id="resultName"></h2>
+        <blockquote id="resultTagline"></blockquote>
+      </div>
+
+      <article class="report-card portrait-card">
+        <p class="card-label" data-i18n="portraitLabel">AI 时代画像</p>
+        <p class="portrait-copy" id="portraitCopy"></p>
+        <div class="dimension-grid" id="dimensionGrid"></div>
+      </article>
+
+      <div class="report-grid">
+        <article class="report-card"><p class="card-label" data-i18n="edgeLabel">你的时代红利</p><p id="edgeCopy"></p></article>
+        <article class="report-card warning-card"><p class="card-label" data-i18n="bugLabel">你的时代 Bug</p><p id="bugCopy"></p></article>
+        <article class="report-card feature-card"><p class="card-label" data-i18n="aiUseLabel">适合的 AI 使用方式</p><p id="aiUseCopy"></p></article>
+        <article class="report-card"><p class="card-label" data-i18n="workLabel">工作模式</p><p id="workCopy"></p></article>
+        <article class="report-card"><p class="card-label" data-i18n="learnLabel">学习模式</p><p id="learnCopy"></p></article>
+        <article class="report-card"><p class="card-label" data-i18n="collabLabel">人际 / 协作风格</p><p id="collabCopy"></p></article>
+      </div>
+
+      <article class="taste-card">
+        <div><p class="card-label" data-i18n="tasteLabel">你的 Taste OS</p><h3 id="tasteHeading"></h3></div>
+        <p id="tasteCopy"></p>
+      </article>
+
+      <div class="share-actions">
+        <button class="button button-secondary" id="copyResult" type="button" data-i18n="copyResult">复制结果</button>
+        <button class="button button-secondary" id="shareResult" type="button" data-i18n="shareResult">分享</button>
+        <button class="button button-primary" id="downloadCard" type="button" data-i18n="downloadCard">下载结果卡</button>
+      </div>
+      <button class="restart-button" id="restartQuiz" type="button" data-i18n="restart">重新测试</button>
+      <p class="disclaimer" data-i18n="disclaimer">MBAI 用于娱乐与自我探索，不构成心理诊断、职业评价或能力判断。</p>
+    </section>
+  </main>
+
+  <canvas id="shareCanvas" width="1080" height="1350" hidden></canvas>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="data/mbai-data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
+
